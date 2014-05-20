@@ -11,8 +11,26 @@
 
 @interface Deck : NSObject
 
+/**
+ *  Add a card to the top of a deck.
+ *
+ *  @param card  Card to be added to the top of the deck.
+ *  @param atTop YES to add the card at the top.
+ */
 - (void)addCard:(Card *)card atTop:(BOOL)atTop;
+
+/**
+ *  Add a card to the deck. Calls addCard:card atTop:NO
+ *
+ *  @param card Card to be added to the deck.
+ */
 - (void)addCard:(Card *)card;
+
+/**
+ *  Draw and remove a random card from the deck.
+ *
+ *  @return The random Card that has been drawn from the deck.
+ */
 - (Card *)drawRandomCard;
 
 @end
