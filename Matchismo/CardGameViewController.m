@@ -12,9 +12,6 @@
 
 @interface CardGameViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
-@property (nonatomic) NSInteger flipCount;
-@property (strong, nonatomic) Deck *deck;
 @property (nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 
@@ -36,48 +33,26 @@
 }
 
 // Property Methods
-- (void)setFlipCount:(NSInteger)flipCount {
-    if (!_flipCount) {
-        _flipCount = 0;
-    }
-    _flipCount = flipCount;
-    self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %ld", self.flipCount];
-    NSLog(@"flipCount changed to %ld", self.flipCount);
-}
-
 - (CardMatchingGame *)_game {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                           usingDeck:[self createDeck]];
     return _game;
 }
 
-- (Deck *)deck {
-    if (!_deck) {
-        _deck = [self createDeck];
-    }
-    return _deck;
-}
-
+// Instance Methods
 - (Deck *)createDeck {
     return [[PlayingCardDeck alloc] init];
 }
 
-// Instance Methods
 - (IBAction)touchCardButton:(UIButton *)sender {
-    if ([sender.currentTitle length]) {
-        [sender setBackgroundImage:[UIImage imageNamed:@"cardback"]
-                          forState:UIControlStateNormal];
-        [sender setTitle:@"" forState:UIControlStateNormal];
-        self.flipCount++;
-    } else {
-        Card *card = [self.deck drawRandomCard];
-        if (card) {
-            [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"]
-                              forState:UIControlStateNormal];
-            [sender setTitle:card.contents forState:UIControlStateNormal];
-            self.flipCount++;
-        }
-    }
+    int chooseButtonIndex = [self.cardButtons indexOfObject:sender];
+    [self.game chooseCardAtIndex:chooseButtonIndex];
+    [self updateUI];
+}
+
+// Private Methods
+- (void)updateUI {
+    
 }
 
 @end
