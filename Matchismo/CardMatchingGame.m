@@ -53,5 +53,9 @@
     return self;
 }
 
+- (Card *)cardAtIndex:(NSUInteger)index {
+    return self.cards[index];
+}
+
 
 @end
