@@ -8,12 +8,15 @@
 
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
+#import "CardMatchingGame.h"
 
 @interface CardGameViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) NSInteger flipCount;
 @property (strong, nonatomic) Deck *deck;
+@property (nonatomic) CardMatchingGame *game;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 
 @end
 
@@ -40,6 +43,12 @@
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %ld", self.flipCount];
     NSLog(@"flipCount changed to %ld", self.flipCount);
+}
+
+- (CardMatchingGame *)_game {
+    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                          usingDeck:[self createDeck]];
+    return _game;
 }
 
 - (Deck *)deck {
