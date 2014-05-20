@@ -55,17 +55,17 @@
     for (UIButton *cardButton in self.cardButtons) {
         int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
-        [cardButton setTitle:[self cardTitle:card] forState:UIControlStateNormal];
+        [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
     }
 }
 
-- (NSString *)cardTitle: (Card *)card {
-    return ([card.isChosen]) ? card.contents : @"";
+- (NSString *)titleForCard:(Card *)card {
+    return card.isChosen ? card.contents : @"";
 }
 
-- (UIImage *)backgroundImageForCard: (Card *)card {
-    return [UIImage imageNamed:([card.isChosen]) ? @"cardfront" : @"cardback"];
+- (UIImage *)backgroundImageForCard:(Card *)card {
+    return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
 }
 
 @end
