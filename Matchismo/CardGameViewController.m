@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 
 @end
 
@@ -45,7 +46,7 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-    int chooseButtonIndex = [self.cardButtons indexOfObject:sender];
+    NSUInteger chooseButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chooseButtonIndex];
     [self updateUI];
 }
@@ -53,14 +54,12 @@
 // Private Methods
 - (void)updateUI {
     for (UIButton *cardButton in self.cardButtons) {
-        int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
+        NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
-        if (!card) {
-            NSLog(@"CARD IS NIL");
-        }
         [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
+        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
     }
 }
 

@@ -71,7 +71,7 @@ static const int COST_TO_CHOOSE = 1;
                     if (matchScore) {
                         self.score += matchScore * MATCH_BONUS;
                         otherCard.matched = YES;
-                        otherCard.chosen = YES;
+                        card.matched = YES;
                     } else {
                         self.score -= MISMATCH_PENALTY;
                         otherCard.chosen = NO;
