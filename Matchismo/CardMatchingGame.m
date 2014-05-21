@@ -18,7 +18,7 @@
 /**
  *  Cards in use in the game.
  */
-@property (nonatomic) NSMutableArray *cards;
+@property (strong, nonatomic) NSMutableArray *cards;
 
 @end
 
@@ -30,7 +30,7 @@ static const int MISMATCH_PENALTY = 2;
 static const int COST_TO_CHOOSE = 1;
 
 // Property Methods
-- (NSMutableArray *)_cards {
+- (NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
 }
