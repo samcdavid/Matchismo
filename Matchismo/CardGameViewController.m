@@ -58,7 +58,7 @@
     NSInteger numberOfCardsToMatch =
     [[[self.difficulty titleForSegmentAtIndex:self.difficulty.selectedSegmentIndex] substringToIndex:1] integerValue];
     NSUInteger chooseButtonIndex = [self.cardButtons indexOfObject:sender];
-    ≈
+    
     [self.game chooseCardAtIndex:chooseButtonIndex andMatchCount:numberOfCardsToMatch];
     [self updateUI];
 }
