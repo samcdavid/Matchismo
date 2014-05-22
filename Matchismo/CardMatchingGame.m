@@ -20,6 +20,8 @@
  */
 @property (strong, nonatomic) NSMutableArray *cards;
 
+@property (strong, nonatomic) NSMutableArray *chosenCards;
+
 @end
 
 @implementation CardMatchingGame
@@ -33,6 +35,16 @@ static const int COST_TO_CHOOSE = 1;
 - (NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
+}
+
+- (NSMutableArray *)chosenCards {
+    if (!_chosenCards) _chosenCards = [[NSMutableArray alloc] init];
+    return _chosenCards;
+}
+
+// Private Methods
+- (void)clearChosenCards {
+    [self.chosenCards removeAllObjects];
 }
 
 // Public Methods
