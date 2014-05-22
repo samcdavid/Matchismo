@@ -15,6 +15,7 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *difficulty;
 
 @end
 
@@ -50,8 +51,15 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
+    if (self.difficulty.enabled) {
+        self.difficulty.enabled = NO;
+    }
+    
+    NSInteger numberOfCardsToMatch =
+    [[[self.difficulty titleForSegmentAtIndex:self.difficulty.selectedSegmentIndex] substringToIndex:1] integerValue];
     NSUInteger chooseButtonIndex = [self.cardButtons indexOfObject:sender];
-    [self.game chooseCardAtIndex:chooseButtonIndex];
+    ≈
+    [self.game chooseCardAtIndex:chooseButtonIndex andMatchCount:numberOfCardsToMatch];
     [self updateUI];
 }
 
@@ -77,6 +85,7 @@
 
 - (IBAction)dealCards {
     self.game = [self newGame];
+    self.difficulty.enabled = YES;
     for (UIButton *cardButton in self.cardButtons) {
         [cardButton setTitle:@"" forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[UIImage imageNamed:@"cardback"]

@@ -32,8 +32,10 @@
  *  Choose a card in the game.
  *
  *  @param index The index of the card in the game.
+ *  @param count The number of cards the game should match;
  */
-- (void)chooseCardAtIndex: (NSUInteger)index;
+- (void)chooseCardAtIndex: (NSUInteger)index
+            andMatchCount: (NSUInteger)count;
 
 /**
  *  Retrieve a card in the game with a certain index.

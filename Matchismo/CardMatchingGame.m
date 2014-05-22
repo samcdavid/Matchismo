@@ -58,7 +58,7 @@ static const int COST_TO_CHOOSE = 1;
     return self;
 }
 
-- (void)chooseCardAtIndex:(NSUInteger)index {
+- (void)chooseCardAtIndex:(NSUInteger)index andMatchCount:(NSUInteger)count{
     Card *card = [self cardAtIndex:index];
     
     if (!card.isMatched) {
