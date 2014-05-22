@@ -35,14 +35,18 @@
 
 // Property Methods
 - (CardMatchingGame *)game {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                          usingDeck:[self createDeck]];
+    if (!_game) _game = [self newGame];
     return _game;
 }
 
 // Instance Methods
 - (Deck *)createDeck {
     return [[PlayingCardDeck alloc] init];
+}
+
+- (CardMatchingGame *)newGame {
+    return [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                             usingDeck:[self createDeck]];
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
@@ -69,6 +73,17 @@
 
 - (UIImage *)backgroundImageForCard:(Card *)card {
     return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
+}
+
+- (IBAction)dealCards {
+    self.game = [self newGame];
+    for (UIButton *cardButton in self.cardButtons) {
+        [cardButton setTitle:@"" forState:UIControlStateNormal];
+        [cardButton setBackgroundImage:[UIImage imageNamed:@"cardback"]
+                              forState:UIControlStateNormal];
+        self.scoreLabel.text = @"Score: 0";
+        cardButton.enabled = YES;
+    }
 }
 
 @end
