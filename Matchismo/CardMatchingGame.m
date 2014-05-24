@@ -93,6 +93,7 @@ static const int COST_TO_CHOOSE = 1;
                     !otherCard.isMatched &&
                     [chosenCards count] != (self.numberOfCardsToMatch -1)) {
                     [chosenCards addObject:otherCard];
+                    [self.cardMatchingRoundStack addObject:otherCard];
                 }
                 if ([chosenCards count] == (self.numberOfCardsToMatch - 1)) {
                     NSInteger matchScore = [card match:chosenCards];
