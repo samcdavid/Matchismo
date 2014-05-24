@@ -129,4 +129,8 @@ static const int COST_TO_CHOOSE = 1;
     return (index <= [self.turnDescriptions count]) ? self.turnDescriptions[index] : nil;
 }
 
+- (NSUInteger)getTurnDescriptionCount {
+    return [self.turnDescriptions count] - 1;
+}
+
 @end

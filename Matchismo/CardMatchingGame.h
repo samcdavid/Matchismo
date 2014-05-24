@@ -66,4 +66,11 @@
  */
 - (NSString *)getTurnDescriptionStringAtIndex: (NSUInteger)index;
 
+/**
+ *  Method to determine the number of turn descriptions (0 based).
+ *
+ *  @return The number of turn descriptions.
+ */
+- (NSUInteger)getTurnDescriptionCount;
+
 @end
