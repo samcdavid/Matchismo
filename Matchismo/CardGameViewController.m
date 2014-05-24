@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *difficulty;
+@property (weak, nonatomic) IBOutlet UILabel *turnDescriptionLabel;
 
 @end
 
@@ -72,6 +73,7 @@
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
+        self.turnDescriptionLabel.text = [self.game getLastTurnDescriptionString];
     }
 }
 
@@ -91,6 +93,7 @@
         [cardButton setBackgroundImage:[UIImage imageNamed:@"cardback"]
                               forState:UIControlStateNormal];
         self.scoreLabel.text = @"Score: 0";
+        self.turnDescriptionLabel.text = @"Ready to Play!";
         cardButton.enabled = YES;
     }
 }

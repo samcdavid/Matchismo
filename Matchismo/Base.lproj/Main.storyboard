@@ -403,12 +403,20 @@
                                 </segments>
                                 <color key="tintColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ready to Play!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEX-Fl-wiH">
+                                <rect key="frame" x="20" y="454" width="274" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="difficulty" destination="2bJ-YS-KTB" id="UEh-W6-J3s"/>
                         <outlet property="scoreLabel" destination="U3N-Dt-dlT" id="Smy-Ij-r1H"/>
+                        <outlet property="turnDescriptionLabel" destination="pEX-Fl-wiH" id="mdw-i2-FKz"/>
                         <outletCollection property="cardButtons" destination="jDn-45-Ts2" id="e0C-0Z-CC4"/>
                         <outletCollection property="cardButtons" destination="EHJ-vX-feu" id="jww-3H-uxD"/>
                         <outletCollection property="cardButtons" destination="KD8-HH-q1h" id="P8y-xc-qOa"/>

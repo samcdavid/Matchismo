@@ -21,12 +21,6 @@
 @property (strong, nonatomic) NSMutableArray *cards;
 
 /**
- *  An array of cards the player is currently trying to match. This will be used to create the play by play descriptions.
- *  Only card objects should exist in this array.
- */
-@property (strong, nonatomic) NSMutableArray *cardMatchingRoundStack;
-
-/**
  *  An array of all of the actions taken by the user and their outcomes.
  *  Only NSString objects should exist in this NSMutableArray.
  */
@@ -50,11 +44,6 @@ static const int COST_TO_CHOOSE = 1;
 - (NSMutableArray *)turnDescriptions {
     if (!_turnDescriptions) _turnDescriptions = [[NSMutableArray alloc] init];
     return _turnDescriptions;
-}
-
-- (NSMutableArray *)cardMatchingRoundStack {
-    if (!_cardMatchingRoundStack) _cardMatchingRoundStack = [[NSMutableArray alloc] init];
-    return _cardMatchingRoundStack;
 }
 
 // Public Methods
@@ -84,6 +73,8 @@ static const int COST_TO_CHOOSE = 1;
     Card *card = [self cardAtIndex:index];
     NSMutableArray *chosenCards = [[NSMutableArray alloc] init];
     
+    [self.turnDescriptions addObject:card.contents];
+    
     if (!card.isMatched) {
         if (card.isChosen) {
             card.chosen = NO;
@@ -93,20 +84,29 @@ static const int COST_TO_CHOOSE = 1;
                     !otherCard.isMatched &&
                     [chosenCards count] != (self.numberOfCardsToMatch -1)) {
                     [chosenCards addObject:otherCard];
-                    [self.cardMatchingRoundStack addObject:otherCard];
                 }
                 if ([chosenCards count] == (self.numberOfCardsToMatch - 1)) {
-                    NSInteger matchScore = [card match:chosenCards];
+                    NSInteger matchScore = [card match:chosenCards] * MATCH_BONUS * self.numberOfCardsToMatch;
+                    NSString *descriptionOfTurn = [NSString stringWithFormat:@""];
                     if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS * self.numberOfCardsToMatch;
+                        descriptionOfTurn = [descriptionOfTurn stringByAppendingString:@"Matched "];
+                        self.score += matchScore;
                         for (Card *matchedCard in chosenCards) {
                             matchedCard.matched = YES;
+                            descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"%@ ", matchedCard.contents];
                         }
                         card.matched = YES;
+                        descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"For %ld points.", matchScore];
                     } else {
-                        self.score -= MISMATCH_PENALTY;
+                        NSInteger penalty = MISMATCH_PENALTY * (self.numberOfCardsToMatch - 1);
+                        self.score -= penalty;
                         otherCard.chosen = NO;
+                        for (Card *card in chosenCards) {
+                            descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"%@ ", card.contents];
+                        }
+                        descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"did not match %ld point penalty.", penalty];
                     }
+                    [self.turnDescriptions addObject:descriptionOfTurn];
                     break;
                 }
             }
@@ -123,6 +123,5 @@ static const int COST_TO_CHOOSE = 1;
 - (NSString *)getLastTurnDescriptionString {
     return [self.turnDescriptions lastObject];
 }
-
 
 @end
