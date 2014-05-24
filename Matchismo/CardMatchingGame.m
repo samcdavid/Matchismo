@@ -26,6 +26,12 @@
  */
 @property (strong, nonatomic) NSMutableArray *cardMatchingRoundStack;
 
+/**
+ *  An array of all of the actions taken by the user and their outcomes.
+ *  Only NSString objects should exist in this NSMutableArray.
+ */
+@property (strong, nonatomic) NSMutableArray *turnDescriptions;
+
 @end
 
 @implementation CardMatchingGame
@@ -111,6 +117,10 @@ static const int COST_TO_CHOOSE = 1;
 
 - (Card *)cardAtIndex:(NSUInteger)index {
     return (index <[self.cards count]) ? self.cards[index] : nil;
+}
+
+- (NSString *)getLastTurnDescriptionString {
+    return [self.turnDescriptions lastObject];
 }
 
 
