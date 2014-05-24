@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *difficulty;
 @property (weak, nonatomic) IBOutlet UILabel *turnDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UISlider *turnDescriptionSlider;
 
 @end
 
@@ -64,6 +65,11 @@
     [self updateUI];
 }
 
+- (IBAction)moveTurnDescriptionSlider:(UISlider *)sender {
+    self.turnDescriptionLabel.enabled = NO;
+    self.turnDescriptionLabel.text = [self.game getTurnDescriptionStringAtIndex:self.turnDescriptionSlider.value];
+}
+
 // Private Methods
 - (void)updateUI {
     for (UIButton *cardButton in self.cardButtons) {
@@ -72,9 +78,13 @@
         [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
-        self.turnDescriptionLabel.text = [self.game getLastTurnDescriptionString];
     }
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
+    self.turnDescriptionLabel.enabled = YES;
+    self.turnDescriptionLabel.text = [self.game getLastTurnDescriptionString];
+    self.turnDescriptionSlider.minimumValue = 0.0;
+    self.turnDescriptionSlider.maximumValue = [self.game getTurnDescriptionCount];
+    self.turnDescriptionSlider.value = self.turnDescriptionSlider.maximumValue;
 }
 
 - (NSString *)titleForCard:(Card *)card {
@@ -92,10 +102,11 @@
         [cardButton setTitle:@"" forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[UIImage imageNamed:@"cardback"]
                               forState:UIControlStateNormal];
-        self.scoreLabel.text = @"Score: 0";
-        self.turnDescriptionLabel.text = @"Ready to Play!";
         cardButton.enabled = YES;
     }
+    self.scoreLabel.text = @"Score: 0";
+    self.turnDescriptionLabel.text = @"Ready to Play!";
+    self.turnDescriptionLabel.enabled = YES;
 }
 
 @end

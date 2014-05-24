@@ -73,7 +73,7 @@ static const int COST_TO_CHOOSE = 1;
     Card *card = [self cardAtIndex:index];
     NSMutableArray *chosenCards = [[NSMutableArray alloc] init];
     
-    [self.turnDescriptions addObject:card.contents];
+    [self.turnDescriptions addObject:[card.contents stringByAppendingString:@" was flipped."]];
     
     if (!card.isMatched) {
         if (card.isChosen) {
