@@ -122,7 +122,11 @@ static const int COST_TO_CHOOSE = 1;
 }
 
 - (NSString *)getLastTurnDescriptionString {
-    return [self.turnDescriptions lastObject];
+    return [self getTurnDescriptionStringAtIndex:([self.turnDescriptions count] - 1)];
+}
+
+- (NSString *)getTurnDescriptionStringAtIndex:(NSUInteger)index {
+    return (index <= [self.turnDescriptions count]) ? self.turnDescriptions[index] : nil;
 }
 
 @end

@@ -57,4 +57,13 @@
  */
 - (NSString *)getLastTurnDescriptionString;
 
+/**
+ *  Obtain the NSString turn description for the specified index.
+ *
+ *  @param index Index of the turn description to be obtained.
+ *
+ *  @return NSString object for the turn description.
+ */
+- (NSString *)getTurnDescriptionStringAtIndex: (NSUInteger)index;
+
 @end
