@@ -26,6 +26,7 @@
 		70AA72641929332500C35008 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AA72631929332500C35008 /* Deck.m */; };
 		70AA7267192972CE00C35008 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AA7266192972CE00C35008 /* PlayingCard.m */; };
 		70AA726A19297B5800C35008 /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AA726919297B5800C35008 /* PlayingCardDeck.m */; };
+		70B06F0319315A0F00184754 /* PlayingCardGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B06F0219315A0F00184754 /* PlayingCardGameViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		70AA7266192972CE00C35008 /* PlayingCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCard.m; sourceTree = "<group>"; };
 		70AA726819297B5800C35008 /* PlayingCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardDeck.h; sourceTree = "<group>"; };
 		70AA726919297B5800C35008 /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardDeck.m; sourceTree = "<group>"; };
+		70B06F0119315A0F00184754 /* PlayingCardGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardGameViewController.h; sourceTree = "<group>"; };
+		70B06F0219315A0F00184754 /* PlayingCardGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardGameViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +175,8 @@
 			children = (
 				70AA723C1929304D00C35008 /* CardGameViewController.h */,
 				70AA723D1929304D00C35008 /* CardGameViewController.m */,
+				70B06F0119315A0F00184754 /* PlayingCardGameViewController.h */,
+				70B06F0219315A0F00184754 /* PlayingCardGameViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 				70AA726A19297B5800C35008 /* PlayingCardDeck.m in Sources */,
 				70AA72341929304D00C35008 /* main.m in Sources */,
 				70AA7261192931A100C35008 /* Card.m in Sources */,
+				70B06F0319315A0F00184754 /* PlayingCardGameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

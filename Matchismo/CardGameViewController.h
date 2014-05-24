@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deck.h"
 
 @interface CardGameViewController : UIViewController
+
+/**
+ *  Abstract method that needs to be overridden for each card matching game.
+ *
+ *  @return Deck the game will be played with.
+ */
+- (Deck *)createDeck;
 
 @end
