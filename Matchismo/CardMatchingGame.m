@@ -89,7 +89,7 @@ static const int COST_TO_CHOOSE = 1;
                     NSInteger matchScore = [card match:chosenCards] * MATCH_BONUS * self.numberOfCardsToMatch;
                     NSString *descriptionOfTurn = [NSString stringWithFormat:@""];
                     if (matchScore) {
-                        descriptionOfTurn = [descriptionOfTurn stringByAppendingString:@"Matched "];
+                        descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"Matched %@ ", card.contents];
                         self.score += matchScore;
                         for (Card *matchedCard in chosenCards) {
                             matchedCard.matched = YES;
@@ -100,9 +100,10 @@ static const int COST_TO_CHOOSE = 1;
                     } else {
                         NSInteger penalty = MISMATCH_PENALTY * (self.numberOfCardsToMatch - 1);
                         self.score -= penalty;
-                        otherCard.chosen = NO;
-                        for (Card *card in chosenCards) {
-                            descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"%@ ", card.contents];
+                        descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"%@ ", card.contents];
+                        for (Card *unmatchedCard in chosenCards) {
+                            descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"%@ ", unmatchedCard.contents];
+                            unmatchedCard.chosen = NO;
                         }
                         descriptionOfTurn = [descriptionOfTurn stringByAppendingFormat:@"did not match %ld point penalty.", penalty];
                     }
