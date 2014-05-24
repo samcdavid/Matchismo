@@ -20,6 +20,12 @@
  */
 @property (strong, nonatomic) NSMutableArray *cards;
 
+/**
+ *  An array of cards the player is currently trying to match. This will be used to create the play by play descriptions.
+ *  Only card objects should exist in this array.
+ */
+@property (strong, nonatomic) NSMutableArray *cardMatchingRoundStack;
+
 @end
 
 @implementation CardMatchingGame
@@ -33,6 +39,16 @@ static const int COST_TO_CHOOSE = 1;
 - (NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
+}
+
+- (NSMutableArray *)turnDescriptions {
+    if (!_turnDescriptions) _turnDescriptions = [[NSMutableArray alloc] init];
+    return _turnDescriptions;
+}
+
+- (NSMutableArray *)cardMatchingRoundStack {
+    if (!_cardMatchingRoundStack) _cardMatchingRoundStack = [[NSMutableArray alloc] init];
+    return _cardMatchingRoundStack;
 }
 
 // Public Methods

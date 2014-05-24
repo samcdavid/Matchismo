@@ -21,6 +21,13 @@
  */
 @property (nonatomic) NSUInteger numberOfCardsToMatch;
 
+
+/**
+ *  An array of all of the actions taken by the user and their outcomes.
+ *  Only NSString objects should exist in this NSMutableArray.
+ */
+@property (strong, nonatomic) NSMutableArray *turnDescriptions;
+
 /**
  *  This is the designated init method for CardMatchingGame.
  *  The inherited init method will return nil.
