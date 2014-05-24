@@ -58,7 +58,7 @@ static const int COST_TO_CHOOSE = 1;
     return self;
 }
 
-- (void)chooseCardAtIndex:(NSUInteger)index andMatchCount:(NSUInteger)count{
+- (void)chooseCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
     NSMutableArray *chosenCards = [[NSMutableArray alloc] init];
     
@@ -69,13 +69,13 @@ static const int COST_TO_CHOOSE = 1;
             for (Card *otherCard in self.cards) {
                 if (otherCard.isChosen &&
                     !otherCard.isMatched &&
-                    [chosenCards count] != (count -1)) {
+                    [chosenCards count] != (self.numberOfCardsToMatch -1)) {
                     [chosenCards addObject:otherCard];
                 }
-                if ([chosenCards count] == (count - 1)) {
+                if ([chosenCards count] == (self.numberOfCardsToMatch - 1)) {
                     NSInteger matchScore = [card match:chosenCards];
                     if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS * count;
+                        self.score += matchScore * MATCH_BONUS * self.numberOfCardsToMatch;
                         for (Card *matchedCard in chosenCards) {
                             matchedCard.matched = YES;
                         }

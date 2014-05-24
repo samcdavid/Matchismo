@@ -17,6 +17,11 @@
 @property (nonatomic, readonly) NSInteger score;
 
 /**
+ *  The number of cards the game should match.
+ */
+@property (nonatomic) NSUInteger numberOfCardsToMatch;
+
+/**
  *  This is the designated init method for CardMatchingGame.
  *  The inherited init method will return nil.
  *
@@ -32,10 +37,8 @@
  *  Choose a card in the game.
  *
  *  @param index The index of the card in the game.
- *  @param count The number of cards the game should match;
  */
-- (void)chooseCardAtIndex: (NSUInteger)index
-            andMatchCount: (NSUInteger)count;
+- (void)chooseCardAtIndex: (NSUInteger)index;
 
 /**
  *  Retrieve a card in the game with a certain index.
