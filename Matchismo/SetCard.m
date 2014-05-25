@@ -28,6 +28,10 @@ static const int TRIANGLE_INDEX = 0;
 static const int CIRCLE_INDEX = 1;
 static const int SQUARE_INDEX = 2;
 static const int NUMBER_OF_CARDS_TO_MATCH = 2;
+static const int RANK_INDEX = 0;
+static const int SYMBOL_INDEX = 1;
+static const int SHADE_INDEX = 2;
+static const int COLOR_INDEX = 3;
 
 // Property Methods
 - (void)setRank:(NSUInteger)rank {
@@ -86,10 +90,10 @@ static const int NUMBER_OF_CARDS_TO_MATCH = 2;
 
 - (NSDictionary *)propertyDictionary {
     if (!_propertyDictionary) {
-        _propertyDictionary = @{[self validPropertyDictionaryProperties][0]: [NSString stringWithFormat:@"%ld",self.rank],
-                                [self validPropertyDictionaryProperties][1]: self.symbol,
-                                [self validPropertyDictionaryProperties][2]: self.shadeString,
-                                [self validPropertyDictionaryProperties][3]: self.colorString};
+        _propertyDictionary = @{[self validPropertyDictionaryProperties][RANK_INDEX]: [NSString stringWithFormat:@"%ld",self.rank],
+                                [self validPropertyDictionaryProperties][SYMBOL_INDEX]: self.symbol,
+                                [self validPropertyDictionaryProperties][SHADE_INDEX]: self.shadeString,
+                                [self validPropertyDictionaryProperties][COLOR_INDEX]: self.colorString};
     }
     return _propertyDictionary;
 }
