@@ -22,6 +22,11 @@
 @property (nonatomic, readonly) NSUInteger numberOfCardsToMatch;
 
 /**
+ *  Version of turnDescriptions that contains attributed strings.
+ */
+@property (strong, nonatomic, readonly) NSArray *attributedTurnDescriptions;
+
+/**
  *  This is the designated init method for CardMatchingGame.
  *  The inherited init method will return nil.
  *

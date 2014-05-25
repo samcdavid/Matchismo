@@ -18,4 +18,11 @@
  */
 - (Deck *)createDeck;
 
+/**
+ *  Method to obtain the move history from the CardMatchingGame instance.
+ *
+ *  @return NSAttributedString turn descriptions.
+ */
+- (NSArray *)attributedCardGameTurnDescriptions;
+
 @end

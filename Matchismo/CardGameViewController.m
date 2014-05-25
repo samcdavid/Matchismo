@@ -44,6 +44,11 @@
     return nil;
 }
 
+- (NSArray *)attributedCardGameTurnDescriptions {
+    return self.game.attributedTurnDescriptions;
+}
+
+// Private Methods
 - (CardMatchingGame *)newGame {
     return [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                              usingDeck:[self createDeck]];
@@ -56,7 +61,6 @@
     [self updateUI];
 }
 
-// Private Methods
 - (void)updateUI {
     for (UIButton *cardButton in self.cardButtons) {
         NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
