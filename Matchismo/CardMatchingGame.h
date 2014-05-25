@@ -19,7 +19,7 @@
 /**
  *  The number of cards the game should match.
  */
-@property (nonatomic) NSUInteger numberOfCardsToMatch;
+@property (nonatomic, readonly) NSUInteger numberOfCardsToMatch;
 
 /**
  *  This is the designated init method for CardMatchingGame.

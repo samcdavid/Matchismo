@@ -16,6 +16,11 @@
 @property (nonatomic, readwrite) NSInteger score;
 
 /**
+ *  Redeclare numberOfCardsToMatch so that is may be set in the designated init.
+ */
+@property (nonatomic, readwrite) NSUInteger numberOfCardsToMatch;
+
+/**
  *  Cards in use in the game.
  */
 @property (strong, nonatomic) NSMutableArray *cards;
@@ -64,6 +69,7 @@ static const int COST_TO_CHOOSE = 1;
                 break;
             }
         }
+        self.numberOfCardsToMatch = deck.numberOfCardsToMatch;
     }
     
     return self;

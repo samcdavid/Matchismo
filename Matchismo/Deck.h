@@ -12,6 +12,12 @@
 @interface Deck : NSObject
 
 /**
+ *  An abstract property that must be implemented by the deck in order
+ *  to determine how many cards the game should match against.
+ */
+@property (nonatomic, readonly) NSUInteger numberOfCardsToMatch;
+
+/**
  *  Add a card to the top of a deck.
  *
  *  @param card  Card to be added to the top of the deck.
