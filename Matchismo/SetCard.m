@@ -18,15 +18,15 @@
 @implementation SetCard
 
 // Constants
-static const int STROKE_INDEX = 0;
-static const int SOLID_INDEX = 1;
+//static const int STROKE_INDEX = 0;
+//static const int SOLID_INDEX = 1;
 static const int STRIPE_INDEX = 2;
-static const int GREEN_INDEX = 0;
-static const int RED_INDEX = 1;
-static const int PURPLE_INDEX = 2;
-static const int TRIANGLE_INDEX = 0;
-static const int CIRCLE_INDEX = 1;
-static const int SQUARE_INDEX = 2;
+//static const int GREEN_INDEX = 0;
+//static const int RED_INDEX = 1;
+//static const int PURPLE_INDEX = 2;
+//static const int TRIANGLE_INDEX = 0;
+//static const int CIRCLE_INDEX = 1;
+//static const int SQUARE_INDEX = 2;
 static const int NUMBER_OF_CARDS_TO_MATCH = 2;
 static const int RANK_INDEX = 0;
 static const int SYMBOL_INDEX = 1;
