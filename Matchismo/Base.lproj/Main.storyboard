@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="9JN-6Q-KbI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IUE-hZ-uDt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Set Card Game View Controller - Set-->
+        <scene sceneID="QvV-Zg-hx8">
+            <objects>
+                <viewController id="oUi-1O-sCo" customClass="SetCardGameViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jA8-Ae-mvp"/>
+                        <viewControllerLayoutGuide type="bottom" id="d3H-2c-DMW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VaK-3h-nGx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Set" id="Hg9-Wc-4Pc">
+                        <barButtonItem key="rightBarButtonItem" title="Moves" id="wXS-Hi-lL7">
+                            <connections>
+                                <segue destination="wRv-WA-1qt" kind="push" id="EaX-xD-Ikw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T84-MV-ST2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="177" y="-579"/>
+        </scene>
         <!--Playing Card Game View Controller - Match-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -479,12 +504,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBk-MG-CVJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="668" y="83"/>
+            <point key="canvasLocation" x="833" y="-235"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Playing Card-->
         <scene sceneID="YIn-qw-Qqg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9JN-6Q-KbI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Playing Card" id="cwf-j0-BQd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7k-bn-HEy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -499,6 +525,44 @@
             </objects>
             <point key="canvasLocation" x="-349" y="84"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="00B-sk-DVK">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="IUE-hZ-uDt" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="YJz-X1-AME">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="9JN-6Q-KbI" kind="relationship" relationship="viewControllers" id="egc-qA-rNN"/>
+                        <segue destination="waX-fV-aWq" kind="relationship" relationship="viewControllers" id="hhk-aw-mKu"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LHp-YT-Qtt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-982" y="-235"/>
+        </scene>
+        <!--Navigation Controller - Set-->
+        <scene sceneID="M4r-kH-1AP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="waX-fV-aWq" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Set" id="xcT-vj-OUq"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DPX-pp-Bte">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oUi-1O-sCo" kind="relationship" relationship="rootViewController" id="IEL-Xb-i7z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mvd-e2-q4P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-343" y="-579"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cardback" width="64" height="96"/>
@@ -509,4 +573,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="EaX-xD-Ikw"/>
+    </inferredMetricsTieBreakers>
 </document>
