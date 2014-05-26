@@ -19,12 +19,7 @@
 /**
  *  The number of cards the game should match.
  */
-@property (nonatomic, readonly) NSUInteger numberOfCardsToMatch;
-
-/**
- *  Version of turnDescriptions that contains attributed strings.
- */
-@property (strong, nonatomic, readonly) NSArray *attributedTurnDescriptions;
+@property (nonatomic) NSUInteger numberOfCardsToMatch;
 
 /**
  *  This is the designated init method for CardMatchingGame.

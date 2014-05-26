@@ -16,11 +16,6 @@
 @property (nonatomic, readwrite) NSInteger score;
 
 /**
- *  Redeclare numberOfCardsToMatch so that it may be set in the designated init.
- */
-@property (nonatomic, readwrite) NSUInteger numberOfCardsToMatch;
-
-/**
  *  Cards in use in the game.
  */
 @property (strong, nonatomic) NSMutableArray *cards;
@@ -51,19 +46,6 @@ static const int COST_TO_CHOOSE = 1;
     return _turnDescriptions;
 }
 
-- (NSArray *)attributedTurnDescriptions {
-    NSMutableArray *attributedTurnDescriptions = [[NSMutableArray alloc] init];
-    
-    for (NSString *turnDescription in self.turnDescriptions) {
-        NSMutableAttributedString *attributedTurnDescription = [[NSMutableAttributedString alloc] initWithString:turnDescription];
-        [attributedTurnDescription addAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody]}
-                                           range:NSMakeRange(0, [turnDescription length])];
-        [attributedTurnDescriptions addObject:attributedTurnDescription];
-    }
-    
-    return attributedTurnDescriptions;
-}
-
 // Public Methods
 - (instancetype)init {
     return nil;
@@ -82,7 +64,6 @@ static const int COST_TO_CHOOSE = 1;
                 break;
             }
         }
-        self.numberOfCardsToMatch = deck.numberOfCardsToMatch;
     }
     
     return self;

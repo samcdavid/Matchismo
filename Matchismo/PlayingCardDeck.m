@@ -26,8 +26,4 @@
     return self;
 }
 
-- (NSUInteger)numberOfCardsToMatch {
-    return 2;
-}
-
 @end

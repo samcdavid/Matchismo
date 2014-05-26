@@ -14,7 +14,9 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *difficulty;
 @property (weak, nonatomic) IBOutlet UILabel *turnDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UISlider *turnDescriptionSlider;
 
 @end
 
@@ -44,23 +46,30 @@
     return nil;
 }
 
-- (NSArray *)attributedCardGameTurnDescriptions {
-    return self.game.attributedTurnDescriptions;
-}
-
-// Private Methods
 - (CardMatchingGame *)newGame {
     return [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                              usingDeck:[self createDeck]];
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
+    if (self.difficulty.enabled) {
+        self.difficulty.enabled = NO;
+    }
+    
+    self.game.numberOfCardsToMatch =
+    [[[self.difficulty titleForSegmentAtIndex:self.difficulty.selectedSegmentIndex] substringToIndex:1] integerValue];
     NSUInteger chooseButtonIndex = [self.cardButtons indexOfObject:sender];
     
     [self.game chooseCardAtIndex:chooseButtonIndex];
     [self updateUI];
 }
 
+- (IBAction)moveTurnDescriptionSlider:(UISlider *)sender {
+    self.turnDescriptionLabel.enabled = NO;
+    self.turnDescriptionLabel.text = [self.game getTurnDescriptionStringAtIndex:self.turnDescriptionSlider.value];
+}
+
+// Private Methods
 - (void)updateUI {
     for (UIButton *cardButton in self.cardButtons) {
         NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
@@ -72,6 +81,9 @@
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
     self.turnDescriptionLabel.enabled = YES;
     self.turnDescriptionLabel.text = [self.game getLastTurnDescriptionString];
+    self.turnDescriptionSlider.minimumValue = 0.0;
+    self.turnDescriptionSlider.maximumValue = [self.game getTurnDescriptionCount];
+    self.turnDescriptionSlider.value = self.turnDescriptionSlider.maximumValue;
 }
 
 - (NSString *)titleForCard:(Card *)card {
@@ -84,6 +96,7 @@
 
 - (IBAction)dealCards {
     self.game = [self newGame];
+    self.difficulty.enabled = YES;
     for (UIButton *cardButton in self.cardButtons) {
         [cardButton setTitle:@"" forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[UIImage imageNamed:@"cardback"]
