@@ -14,6 +14,10 @@
 
 @implementation PlayingCardGameViewController
 
+- (NSUInteger)numberOfCardsToMatch {
+    return 2;
+}
+
 - (Deck *)createDeck {
     return [[PlayingCardDeck alloc] init];
 }
