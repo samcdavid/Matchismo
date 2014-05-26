@@ -12,6 +12,11 @@
 @interface CardGameViewController : UIViewController
 
 /**
+ *  Abstract readonly property whose getter must be overridden for each view controller.
+ */
+@property (nonatomic, readonly) NSUInteger numberOfCardsToMatch;
+
+/**
  *  Abstract method that needs to be overridden for each card matching game.
  *
  *  @return Deck the game will be played with.
