@@ -48,7 +48,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -57,8 +57,9 @@
     if ([segue.identifier isEqualToString:@"PlayingCardMoveHistorySegue"] &&
         [segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
         HistoryViewController *historyController = (HistoryViewController *)segue.destinationViewController;
+        historyController.turnHistoryDescriptions = self.turnDescriptions;
     }
 }
-*/
+
 
 @end

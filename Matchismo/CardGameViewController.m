@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) NSMutableAttributedString *turnDescription;
-@property (strong, nonatomic) NSMutableArray *turnDescriptions;
+@property (strong, nonatomic, readwrite) NSMutableArray *turnDescriptions;
 @property (strong, nonatomic) NSMutableArray *matchStack;
 @property (nonatomic) NSInteger currentScore;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;

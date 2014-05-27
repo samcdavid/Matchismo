@@ -10,29 +10,48 @@
 
 @interface HistoryViewController ()
 
+/**
+ *  Property to store the turnDescriptions so they may be displayed on screen.
+ */
+@property (strong, nonatomic, readonly) NSAttributedString *turnHistoryDescription;
+
+@property (weak, nonatomic) IBOutlet UITextView *turnHistoryDescriptionTextView;
+
 @end
 
 @implementation HistoryViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+// Property Methods
+
+- (NSArray *)turnHistoryDescriptions {
+    if (!_turnHistoryDescriptions) _turnHistoryDescriptions = [[NSArray alloc] init];
+    return _turnHistoryDescriptions;
+}
+
+- (NSAttributedString *)turnHistoryDescription {
+    NSMutableAttributedString *history = [[NSMutableAttributedString alloc] init];
+    NSAttributedString *newLine = [[NSAttributedString alloc] initWithString:@"\n"];
+    
+    for (NSMutableAttributedString *turn in self.turnHistoryDescriptions) {
+        [history appendAttributedString:turn];
+        [history appendAttributedString:newLine];
+        [history setAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
+                                 
+                                 NSForegroundColorAttributeName: [UIColor blackColor]}
+                         range:NSMakeRange(0, [history length])];
     }
-    return self;
+    
+    return history;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    self.turnHistoryDescriptionTextView.attributedText = self.turnHistoryDescription;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.turnHistoryDescriptions = nil;
 }
 
 /*

@@ -22,6 +22,11 @@
 @property (strong, nonatomic, readonly) NSDictionary *attributesDictionary;
 
 /**
+ *  Array containing NSMutableAttributeStrings for all of the turn descriptions.
+ */
+@property (strong, nonatomic, readonly) NSMutableArray *turnDescriptions;
+
+/**
  *  Abstract method that needs to be overridden for each card matching game.
  *
  *  @return Deck the game will be played with.
