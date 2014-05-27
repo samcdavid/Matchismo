@@ -461,6 +461,24 @@
             </objects>
             <point key="canvasLocation" x="110" y="20"/>
         </scene>
+        <!--History View Controller-->
+        <scene sceneID="dK8-N7-DNX">
+            <objects>
+                <viewController id="Thz-sG-UvX" customClass="HistoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L2d-L6-KNX"/>
+                        <viewControllerLayoutGuide type="bottom" id="9tn-r5-kC8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WHL-Jd-O5n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eOa-Ms-MkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="614" y="20"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cardback" width="64" height="96"/>
