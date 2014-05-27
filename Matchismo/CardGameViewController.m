@@ -12,11 +12,13 @@
 @interface CardGameViewController ()
 
 @property (strong, nonatomic) CardMatchingGame *game;
+@property (strong, nonatomic) NSMutableAttributedString *turnDescription;
+@property (strong, nonatomic) NSMutableArray *turnDescriptions;
+@property (strong, nonatomic) NSMutableArray *matchStack;
+@property (nonatomic) NSInteger currentScore;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *difficulty;
 @property (weak, nonatomic) IBOutlet UILabel *turnDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UISlider *turnDescriptionSlider;
 
 @end
 
@@ -41,8 +43,45 @@
     return _game;
 }
 
+@synthesize turnDescription = _turnDescription;
+
+- (NSMutableAttributedString *)turnDescription {
+    if (!_turnDescription) {
+        _turnDescription = [[NSMutableAttributedString alloc] initWithString:@"Ready to Play!"];
+    }
+    return _turnDescription;
+}
+
+- (void)setTurnDescription:(NSMutableAttributedString *)turnDescription {
+    _turnDescription = turnDescription;
+}
+
+- (NSMutableArray *)turnDescriptions {
+    if (!_turnDescriptions) {
+        _turnDescriptions = [[NSMutableArray alloc] initWithObjects:self.turnDescription, nil];
+    }
+    return _turnDescriptions;
+}
+
+- (NSMutableArray *)matchStack {
+    if (!_matchStack) {
+        _matchStack = [[NSMutableArray alloc] init];
+    }
+    return _matchStack;
+}
+
+- (NSDictionary *)attributesDictionary {
+    return @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
+             
+             NSForegroundColorAttributeName: [UIColor blackColor]};
+}
+
 // Instance Methods
 - (Deck *)createDeck {
+    return nil;
+}
+
+- (NSMutableAttributedString *)attributedContentsOfCard:(Card *)card {
     return nil;
 }
 
@@ -52,41 +91,71 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-    if (self.difficulty.enabled) {
-        self.difficulty.enabled = NO;
-    }
-    
+    self.currentScore = self.game.score;
     self.game.numberOfCardsToMatch = self.numberOfCardsToMatch;
     NSUInteger chooseButtonIndex = [self.cardButtons indexOfObject:sender];
-    
+    [self.matchStack addObject:[self.game cardAtIndex:chooseButtonIndex]];
     [self.game chooseCardAtIndex:chooseButtonIndex];
+    [self updateTurnDescriptions];
     [self updateUI];
 }
 
-- (IBAction)moveTurnDescriptionSlider:(UISlider *)sender {
-    self.turnDescriptionLabel.enabled = NO;
-    self.turnDescriptionLabel.text = [self.game getTurnDescriptionStringAtIndex:self.turnDescriptionSlider.value];
+// Private Methods
+- (void)updateTurnDescriptions {
+    self.turnDescription = [[NSMutableAttributedString alloc]
+                            initWithAttributedString:[self attributedContentsOfCard:[self.matchStack lastObject]]];
+    [self.turnDescription appendAttributedString:[[NSAttributedString alloc] initWithString:@" was flipped."]];
+    [self.turnDescriptions addObject:self.turnDescription];
+    [self updateTurnDescriptionAttributes];
+    
+    if ([self.matchStack count] == self.numberOfCardsToMatch) {
+        if ([[self.matchStack lastObject] isKindOfClass:[Card class]]) {
+            Card *latestChosenCard = (Card *)[self.matchStack lastObject];
+            if (!latestChosenCard.isChosen) {
+                [self.matchStack removeObjectIdenticalTo:latestChosenCard];
+            } else {
+                self.turnDescription = [[NSMutableAttributedString alloc] initWithString:@""];
+                if (latestChosenCard.isMatched) {
+                    for (Card *matchedCard in self.matchStack) {
+                        [self.turnDescription appendAttributedString:[self attributedContentsOfCard:matchedCard]];
+                        [self.turnDescription appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+                    }
+                    NSString *matchString =
+                        [NSString stringWithFormat:@" matched for %ld points.", self.game.score - self.currentScore];
+                    [self.turnDescription appendAttributedString:[[NSAttributedString alloc] initWithString:matchString]];
+                    [self.matchStack removeAllObjects];
+                } else {
+                    for (Card *unMatchedCard in self.matchStack) {
+                        [self.turnDescription appendAttributedString:[self attributedContentsOfCard:unMatchedCard]];
+                        [self.turnDescription appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+                    }
+                    NSString *unMatchString =
+                        [NSString stringWithFormat:@" did not match for %ld points.", self.currentScore - self.game.score];
+                    [self.turnDescription appendAttributedString:[[NSAttributedString alloc] initWithString:unMatchString]];
+                    [self.matchStack removeAllObjects];
+                    [self.matchStack addObject:latestChosenCard];
+                }
+            }
+            [self.turnDescriptions addObject:self.turnDescription];
+            [self updateTurnDescriptionAttributes];
+            }
+    }
 }
 
-// Private Methods
 - (void)updateUI {
     for (UIButton *cardButton in self.cardButtons) {
         NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
-        [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+        [cardButton setAttributedTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
-    self.turnDescriptionLabel.enabled = YES;
-    self.turnDescriptionLabel.text = [self.game getLastTurnDescriptionString];
-    self.turnDescriptionSlider.minimumValue = 0.0;
-    self.turnDescriptionSlider.maximumValue = [self.game getTurnDescriptionCount];
-    self.turnDescriptionSlider.value = self.turnDescriptionSlider.maximumValue;
+    self.turnDescriptionLabel.attributedText = [self.turnDescriptions lastObject];
 }
 
-- (NSString *)titleForCard:(Card *)card {
-    return card.isChosen ? card.contents : @"";
+- (NSAttributedString *)titleForCard:(Card *)card {
+    return card.isChosen ? [self attributedContentsOfCard:card] : [[NSAttributedString alloc] initWithString:@""];
 }
 
 - (UIImage *)backgroundImageForCard:(Card *)card {
@@ -95,16 +164,22 @@
 
 - (IBAction)dealCards {
     self.game = [self newGame];
-    self.difficulty.enabled = YES;
     for (UIButton *cardButton in self.cardButtons) {
-        [cardButton setTitle:@"" forState:UIControlStateNormal];
+        [cardButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@""] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[UIImage imageNamed:@"cardback"]
                               forState:UIControlStateNormal];
         cardButton.enabled = YES;
     }
+    self.turnDescription = nil;
+    self.turnDescriptions = nil;
     self.scoreLabel.text = @"Score: 0";
-    self.turnDescriptionLabel.text = @"Ready to Play!";
+    self.turnDescriptionLabel.attributedText = self.turnDescription;
     self.turnDescriptionLabel.enabled = YES;
+}
+
+- (void)updateTurnDescriptionAttributes {
+    NSRange range = NSMakeRange(0, [self.turnDescription length]);
+    [self.turnDescription setAttributes:self.attributesDictionary range:range];
 }
 
 @end

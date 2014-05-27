@@ -17,10 +17,25 @@
 @property (nonatomic, readonly) NSUInteger numberOfCardsToMatch;
 
 /**
+ *  NSDictionary of attributes for attributed strings.
+ */
+@property (strong, nonatomic, readonly) NSDictionary *attributesDictionary;
+
+/**
  *  Abstract method that needs to be overridden for each card matching game.
  *
  *  @return Deck the game will be played with.
  */
 - (Deck *)createDeck;
+
+/**
+ *  Abstract method for determining the attributed string of a given card. This
+ *  is specfic to each CardGameViewController.
+ *
+ *  @param card Card instance to get the attributed string for.
+ *
+ *  @return Attributed string for Card instance.
+ */
+- (NSMutableAttributedString *)attributedContentsOfCard:(Card *)card;
 
 @end
