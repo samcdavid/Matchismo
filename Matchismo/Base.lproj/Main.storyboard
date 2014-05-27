@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Playing Card Game View Controller-->
+        <!--Playing Card Game View Controller - Poker-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="PlayingCardGameViewController" sceneMemberID="viewController">
@@ -260,7 +260,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="kuE-Va-2Jg"/>
+                    <navigationItem key="navigationItem" title="Poker" id="kuE-Va-2Jg">
+                        <barButtonItem key="rightBarButtonItem" title="History" id="dnc-qg-AD2">
+                            <connections>
+                                <segue destination="Thz-sG-UvX" kind="push" identifier="PlayingCardMoveHistorySegue" id="AjZ-hv-cIr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="scoreLabel" destination="U3N-Dt-dlT" id="Smy-Ij-r1H"/>
                         <outlet property="turnDescriptionLabel" destination="pEX-Fl-wiH" id="mdw-i2-FKz"/>
@@ -288,7 +294,7 @@
             </objects>
             <point key="canvasLocation" x="-552" y="-22"/>
         </scene>
-        <!--History View Controller-->
+        <!--History View Controller - History-->
         <scene sceneID="dK8-N7-DNX">
             <objects>
                 <viewController id="Thz-sG-UvX" customClass="HistoryViewController" sceneMemberID="viewController">
@@ -310,6 +316,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" title="History" id="Cik-3e-KO6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOa-Ms-MkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -337,6 +344,7 @@
     <resources>
         <image name="cardback" width="64" height="96"/>
     </resources>
+    <color key="tintColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
