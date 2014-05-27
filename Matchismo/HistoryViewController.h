@@ -10,4 +10,9 @@
 
 @interface HistoryViewController : UIViewController
 
+/**
+ *  Property to store the turnDescriptions so they may be displayed on screen.
+ */
+@property (weak, nonatomic) NSAttributedString *turnHistoryDescriptions;
+
 @end
