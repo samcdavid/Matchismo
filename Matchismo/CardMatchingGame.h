@@ -49,28 +49,4 @@
  */
 - (Card *)cardAtIndex: (NSUInteger)index;
 
-/**
- *  This method is to be used by the controller in order to get the latest
- *  turn description from the model.
- *
- *  @return The last turn description string.
- */
-- (NSString *)getLastTurnDescriptionString;
-
-/**
- *  Obtain the NSString turn description for the specified index.
- *
- *  @param index Index of the turn description to be obtained.
- *
- *  @return NSString object for the turn description.
- */
-- (NSString *)getTurnDescriptionStringAtIndex: (NSUInteger)index;
-
-/**
- *  Method to determine the number of turn descriptions (0 based).
- *
- *  @return The number of turn descriptions.
- */
-- (NSUInteger)getTurnDescriptionCount;
-
 @end
