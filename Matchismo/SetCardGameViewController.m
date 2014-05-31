@@ -103,6 +103,14 @@
     return (cardContents) ? [[NSMutableAttributedString alloc] initWithString:cardContents attributes:cardAttributes] : nil;
 }
 
+- (NSAttributedString *)titleForCard:(Card *)card {
+    return [self attributedContentsOfCard:card];
+}
+
+- (UIImage *)backgroundImageForCard:(Card *)card {
+    return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"setcardback"];
+}
+
 // View Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
