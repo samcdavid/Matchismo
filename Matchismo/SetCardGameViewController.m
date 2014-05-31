@@ -33,6 +33,46 @@
     return @[@"red", @"green", @"purple"];
 }
 
+// Private Methods
+
+- (NSDictionary *)attributesDictionaryForCard:(SetCard *)card {
+    NSMutableDictionary *cardDictionary = [[NSMutableDictionary alloc] init];
+    
+    if ([self.shadeStrings containsObject:card.shading] && [self.colorStrings containsObject:card.color]) {
+        UIColor *cardColor = [self getUIColorFromString:card.color];
+        if ([self.shadeStrings[0] isEqualToString:card.shading]) {
+            [cardDictionary addEntriesFromDictionary:@{NSStrokeWidthAttributeName: @5,
+                                                       NSStrokeColorAttributeName: cardColor}];
+        } else if ([self.shadeStrings[1] isEqualToString:card.shading]) {
+            [cardDictionary addEntriesFromDictionary:@{NSStrokeWidthAttributeName: @-5,
+                                                       NSStrokeColorAttributeName: cardColor,
+                                                       NSForegroundColorAttributeName: [cardColor colorWithAlphaComponent:0.3]}];
+        } else {
+            [cardDictionary addEntriesFromDictionary:@{NSStrokeWidthAttributeName: @-5,
+                                                       NSStrokeColorAttributeName: cardColor,
+                                                       NSForegroundColorAttributeName: cardColor}];
+        }
+    }
+    
+    return cardDictionary;
+}
+
+- (UIColor *)getUIColorFromString:(NSString *)colorString {
+    UIColor *color = nil;
+    
+    if ([self.colorStrings containsObject:colorString]) {
+        if ([colorString isEqualToString:self.colorStrings[0]]) {
+            color = [UIColor redColor];
+        } else if ([colorString isEqualToString:self.colorStrings[1]]) {
+            color = [UIColor greenColor];
+        } else {
+            color = [UIColor purpleColor];
+        }
+    }
+    
+    return color;
+}
+
 // Instance Methods
 
 - (NSUInteger)numberOfCardsToMatch {
