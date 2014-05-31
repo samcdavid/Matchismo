@@ -22,7 +22,7 @@
 // Property Methods
 
 - (NSArray *)symbolStrings {
-    return @[@"▲", @"◼︎", @"●"];
+    return @[@"▲", @"■", @"●"];
 }
 
 - (NSArray *)shadeStrings {

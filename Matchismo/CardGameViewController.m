@@ -104,7 +104,6 @@
                             initWithAttributedString:[self attributedContentsOfCard:[self.matchStack lastObject]]];
     [self.turnDescription appendAttributedString:[[NSAttributedString alloc] initWithString:@" was flipped."]];
     [self.turnDescriptions addObject:self.turnDescription];
-    [self updateTurnDescriptionAttributes];
     
     if ([self.matchStack count] == self.numberOfCardsToMatch) {
         if ([[self.matchStack lastObject] isKindOfClass:[Card class]]) {
@@ -135,7 +134,6 @@
                 }
             }
             [self.turnDescriptions addObject:self.turnDescription];
-            //[self updateTurnDescriptionAttributes];
         }
     }
 }
@@ -174,11 +172,6 @@
     self.turnDescriptionLabel.attributedText = self.turnDescription;
     self.turnDescriptionLabel.enabled = YES;
     [self updateUI];
-}
-
-- (void)updateTurnDescriptionAttributes {
-    NSRange range = NSMakeRange(0, [self.turnDescription length]);
-    [self.turnDescription setAttributes:self.attributesDictionary range:range];
 }
 
 @end

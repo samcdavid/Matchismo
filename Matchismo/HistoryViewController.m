@@ -31,14 +31,12 @@
 - (NSAttributedString *)turnHistoryDescription {
     NSMutableAttributedString *history = [[NSMutableAttributedString alloc] init];
     NSAttributedString *newLine = [[NSAttributedString alloc] initWithString:@"\n"];
+    [history setAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody]}
+                     range:NSMakeRange(0, [history length])];
     
     for (NSMutableAttributedString *turn in self.turnHistoryDescriptions) {
         [history appendAttributedString:turn];
         [history appendAttributedString:newLine];
-        [history setAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
-                                 
-                                 NSForegroundColorAttributeName: [UIColor blackColor]}
-                         range:NSMakeRange(0, [history length])];
     }
     
     return history;
