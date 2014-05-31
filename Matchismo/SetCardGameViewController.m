@@ -11,9 +11,9 @@
 
 @interface SetCardGameViewController ()
 
-@property (weak, nonatomic, readonly) NSArray *symbolStrings;
-@property (weak, nonatomic, readonly) NSArray *shadeStrings;
-@property (weak, nonatomic, readonly) NSArray *colorStrings;
+@property (strong, nonatomic, readonly) NSArray *symbolStrings;
+@property (strong, nonatomic, readonly) NSArray *shadeStrings;
+@property (strong, nonatomic, readonly) NSArray *colorStrings;
 
 @end
 
@@ -39,6 +39,7 @@
     NSMutableDictionary *cardDictionary = [[NSMutableDictionary alloc] init];
     
     if ([self.shadeStrings containsObject:card.shading] && [self.colorStrings containsObject:card.color]) {
+        [cardDictionary addEntriesFromDictionary:self.attributesDictionary];
         UIColor *cardColor = [self getUIColorFromString:card.color];
         if ([self.shadeStrings[0] isEqualToString:card.shading]) {
             [cardDictionary addEntriesFromDictionary:@{NSStrokeWidthAttributeName: @5,
@@ -53,7 +54,6 @@
                                                        NSForegroundColorAttributeName: cardColor}];
         }
     }
-    [cardDictionary addEntriesFromDictionary:self.attributesDictionary];
     
     return cardDictionary;
 }
@@ -103,6 +103,10 @@
     return (cardContents) ? [[NSMutableAttributedString alloc] initWithString:cardContents attributes:cardAttributes] : nil;
 }
 
+- (NSString *)cardBack {
+    return @"cardfront";
+}
+
 - (NSAttributedString *)titleForCard:(Card *)card {
     return [self attributedContentsOfCard:card];
 }
@@ -126,6 +130,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self updateUI];
 }
 
 - (void)didReceiveMemoryWarning

@@ -71,9 +71,7 @@
 }
 
 - (NSDictionary *)attributesDictionary {
-    return @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
-             
-             NSForegroundColorAttributeName: [UIColor blackColor]};
+    return @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody]};
 }
 
 // Instance Methods
@@ -137,8 +135,8 @@
                 }
             }
             [self.turnDescriptions addObject:self.turnDescription];
-            [self updateTurnDescriptionAttributes];
-            }
+            //[self updateTurnDescriptionAttributes];
+        }
     }
 }
 
@@ -166,7 +164,7 @@
     self.game = [self newGame];
     for (UIButton *cardButton in self.cardButtons) {
         [cardButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@""] forState:UIControlStateNormal];
-        [cardButton setBackgroundImage:[UIImage imageNamed:@"cardback"]
+        [cardButton setBackgroundImage:[UIImage imageNamed:self.cardBack]
                               forState:UIControlStateNormal];
         cardButton.enabled = YES;
     }
@@ -175,6 +173,7 @@
     self.scoreLabel.text = @"Score: 0";
     self.turnDescriptionLabel.attributedText = self.turnDescription;
     self.turnDescriptionLabel.enabled = YES;
+    [self updateUI];
 }
 
 - (void)updateTurnDescriptionAttributes {

@@ -26,6 +26,8 @@
  */
 @property (strong, nonatomic, readonly) NSMutableArray *turnDescriptions;
 
+@property (strong, nonatomic, readonly) NSString *cardBack;
+
 /**
  *  Abstract method that needs to be overridden for each card matching game.
  *
@@ -42,5 +44,11 @@
  *  @return Attributed string for Card instance.
  */
 - (NSMutableAttributedString *)attributedContentsOfCard:(Card *)card;
+
+- (NSAttributedString *)titleForCard:(Card *)card;
+
+- (UIImage *)backgroundImageForCard:(Card *)card;
+
+- (void)updateUI;
 
 @end

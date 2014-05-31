@@ -27,6 +27,10 @@
     return [[NSMutableAttributedString alloc] initWithString:card.contents attributes:self.attributesDictionary];
 }
 
+- (NSString *)cardBack {
+    return @"cardback";
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
