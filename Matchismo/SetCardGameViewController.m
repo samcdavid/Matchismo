@@ -53,6 +53,7 @@
                                                        NSForegroundColorAttributeName: cardColor}];
         }
     }
+    [cardDictionary addEntriesFromDictionary:self.attributesDictionary];
     
     return cardDictionary;
 }
@@ -87,7 +88,19 @@
 }
 
 - (NSMutableAttributedString *)attributedContentsOfCard:(Card *)card {
-    return [[NSMutableAttributedString alloc] initWithString:card.contents attributes:self.attributesDictionary];
+    NSString *cardContents = nil;
+    NSDictionary *cardAttributes = nil;
+    
+    if ([card isMemberOfClass:[SetCard class]]) {
+        SetCard *setCard = (SetCard *)card;
+        cardContents = setCard.symbol;
+        for (NSUInteger i = 1; i < setCard.number; i++) {
+            cardContents = [cardContents stringByAppendingFormat:@"%@", setCard.symbol];
+        }
+        cardAttributes = [self attributesDictionaryForCard:setCard];
+    }
+    
+    return (cardContents) ? [[NSMutableAttributedString alloc] initWithString:cardContents attributes:cardAttributes] : nil;
 }
 
 // View Lifecycle
