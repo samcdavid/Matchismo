@@ -24,7 +24,10 @@
 }
 
 - (NSMutableAttributedString *)attributedContentsOfCard:(Card *)card {
-    return [[NSMutableAttributedString alloc] initWithString:card.contents attributes:self.attributesDictionary];
+    NSMutableDictionary *cardAttributes = [self.attributesDictionary mutableCopy];
+    [cardAttributes addEntriesFromDictionary:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
+                                               NSForegroundColorAttributeName: [UIColor blackColor]}];
+    return [[NSMutableAttributedString alloc] initWithString:card.contents attributes:cardAttributes];
 }
 
 - (NSString *)cardBack {

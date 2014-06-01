@@ -105,9 +105,11 @@
     [self.turnDescription appendAttributedString:[[NSAttributedString alloc] initWithString:@" was flipped."]];
     [self.turnDescriptions addObject:self.turnDescription];
     
-    if ([self.matchStack count] == self.numberOfCardsToMatch) {
-        if ([[self.matchStack lastObject] isKindOfClass:[Card class]]) {
+    if ([self.matchStack count] == self.numberOfCardsToMatch &&
+        [[self.matchStack lastObject] isKindOfClass:[Card class]]) {
+        
             Card *latestChosenCard = (Card *)[self.matchStack lastObject];
+        
             if (!latestChosenCard.isChosen) {
                 [self.matchStack removeObjectIdenticalTo:latestChosenCard];
             } else {
@@ -133,8 +135,10 @@
                     [self.matchStack addObject:latestChosenCard];
                 }
             }
-            [self.turnDescriptions addObject:self.turnDescription];
-        }
+        [self.turnDescriptions addObject:self.turnDescription];
+    } else if ([[self.matchStack lastObject] isKindOfClass:[Card class]] &&
+               [self.matchStack indexOfObject:[self.matchStack lastObject]] != [self.matchStack count] - 1) {
+        [self.matchStack removeObject:[self.matchStack lastObject]];
     }
 }
 
